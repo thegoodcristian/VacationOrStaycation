@@ -1,160 +1,241 @@
 package com.finalproject.VacationOrStaycation.entity;
 
+import java.util.ArrayList;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-//@Entity
-//@Table(name="flight")
-@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonIgnoreProperties(ignoreUnknown= true)
 public class Flight {
-	
-	private String adults;
-	private String cabinClass;
-	private String children;
-	private String infants;
-	private String groupPricing;
-	private String currency;
-	private String country;
-	private String orginPlace;
-	private String destinationPlace;
-	private String inboundDate;
-	private String outboundDate;
-	private String locale;
-	
+	private String sessionKey;
+	private String imageUrl;
+	private Integer id;
+	private String code;
+	private String name;
+	private String displayCode;
+	private String carrierId;
+	private Integer flightNumber;
+	private String journeyMode;
+	private String destinationStation;
+	private Integer stops;
+	private String duration;
+	private String arrival;
+	private String carriers;
+	private String directionality;
+	private String originStation;
+	private String departure;
+	private String flightNumbers;
+
 	public Flight() {
 		
 	}
 
-	public Flight(String adults, String cabinClass, String children, String infants, String groupPricing,
-			String currency, String country, String orginPlace, String destinationPlace, String inboundDate,
-			String outboundDate, String locale) {
+	public Flight(String sessionKey, String imageUrl, Integer id, String code, String name, String displayCode, String carrierId,
+			Integer flightNumber, String journeyMode, String destinationStation, Integer stops, String duration,
+			String arrival, String carriers, String directionality, String originStation, String departure,
+			String flightNumbers) {
 		super();
-		this.adults = adults;
-		this.cabinClass = cabinClass;
-		this.children = children;
-		this.infants = infants;
-		this.groupPricing = groupPricing;
-		this.currency = currency;
-		this.country = country;
-		this.orginPlace = orginPlace;
-		this.destinationPlace = destinationPlace;
-		this.inboundDate = inboundDate;
-		this.outboundDate = outboundDate;
-		this.locale = locale;
+		this.sessionKey = sessionKey;
+		this.imageUrl = imageUrl;
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.displayCode = displayCode;
+		this.carrierId = carrierId;
+		this.flightNumber = flightNumber;
+		this.journeyMode = journeyMode;
+		this.destinationStation = destinationStation;
+		this.stops = stops;
+		this.duration = duration;
+		this.arrival = arrival;
+		this.carriers = carriers;
+		this.directionality = directionality;
+		this.originStation = originStation;
+		this.departure = departure;
+		this.flightNumbers = flightNumbers;
 	}
 
-	public String getAdults() {
-		return adults;
+	public Flight(String sessionKey, String imageUrl, String code, String name, String displayCode, String carrierId, Integer flightNumber,
+			String journeyMode, String destinationStation, Integer stops, String duration, String arrival,
+			String carriers, String directionality, String originStation, String departure, String flightNumbers) {
+		super();
+		this.sessionKey = sessionKey;
+		this.imageUrl = imageUrl;
+		this.code = code;
+		this.name = name;
+		this.displayCode = displayCode;
+		this.carrierId = carrierId;
+		this.flightNumber = flightNumber;
+		this.journeyMode = journeyMode;
+		this.destinationStation = destinationStation;
+		this.stops = stops;
+		this.duration = duration;
+		this.arrival = arrival;
+		this.carriers = carriers;
+		this.directionality = directionality;
+		this.originStation = originStation;
+		this.departure = departure;
+		this.flightNumbers = flightNumbers;
 	}
 
-	public void setAdults(String adults) {
-		this.adults = adults;
+	public String getSessionKey() {
+		return sessionKey;
 	}
 
-	public String getCabinClass() {
-		return cabinClass;
+	public void setSessionKey(String sessionKey) {
+		this.sessionKey = sessionKey;
 	}
 
-	public void setCabinClass(String cabinClass) {
-		this.cabinClass = cabinClass;
+	public String getImageUrl() {
+		return imageUrl;
 	}
 
-	public String getChildren() {
-		return children;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
-	public void setChildren(String children) {
-		this.children = children;
+	public Integer getId() {
+		return id;
 	}
 
-	public String getInfants() {
-		return infants;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setInfants(String infants) {
-		this.infants = infants;
+	public String getCode() {
+		return code;
 	}
 
-	public String getGroupPricing() {
-		return groupPricing;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public void setGroupPricing(String groupPricing) {
-		this.groupPricing = groupPricing;
+	public String getName() {
+		return name;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
+	public String getDisplayCode() {
+		return displayCode;
 	}
 
-	public String getCountry() {
-		return country;
+	public void setDisplayCode(String displayCode) {
+		this.displayCode = displayCode;
 	}
 
-	public void setCountry(String country) {
-		this.country = country;
+	public String getCarrierId() {
+		return carrierId;
 	}
 
-	public String getOrginPlace() {
-		return orginPlace;
+	public void setCarrierId(String carrierId) {
+		this.carrierId = carrierId;
 	}
 
-	public void setOrginPlace(String orginPlace) {
-		this.orginPlace = orginPlace;
+	public Integer getFlightNumber() {
+		return flightNumber;
 	}
 
-	public String getDestinationPlace() {
-		return destinationPlace;
+	public void setFlightNumber(Integer flightNumber) {
+		this.flightNumber = flightNumber;
 	}
 
-	public void setDestinationPlace(String destinationPlace) {
-		this.destinationPlace = destinationPlace;
+	public String getJourneyMode() {
+		return journeyMode;
 	}
 
-	public String getInboundDate() {
-		return inboundDate;
+	public void setJourneyMode(String journeyMode) {
+		this.journeyMode = journeyMode;
 	}
 
-	public void setInboundDate(String inboundDate) {
-		this.inboundDate = inboundDate;
+	public String getDestinationStation() {
+		return destinationStation;
 	}
 
-	public String getOutboundDate() {
-		return outboundDate;
+	public void setDestinationStation(String destinationStation) {
+		this.destinationStation = destinationStation;
 	}
 
-	public void setOutboundDate(String outboundDate) {
-		this.outboundDate = outboundDate;
+	public Integer getStops() {
+		return stops;
 	}
 
-	public String getLocale() {
-		return locale;
+	public void setStops(Integer stops) {
+		this.stops = stops;
 	}
 
-	public void setLocale(String locale) {
-		this.locale = locale;
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+	public String getArrival() {
+		return arrival;
+	}
+
+	public void setArrival(String arrival) {
+		this.arrival = arrival;
+	}
+
+	public String getCarriers() {
+		return carriers;
+	}
+
+	public void setCarriers(String carriers) {
+		this.carriers = carriers;
+	}
+
+	public String getDirectionality() {
+		return directionality;
+	}
+
+	public void setDirectionality(String directionality) {
+		this.directionality = directionality;
+	}
+
+	public String getOriginStation() {
+		return originStation;
+	}
+
+	public void setOriginStation(String originStation) {
+		this.originStation = originStation;
+	}
+
+	public String getDeparture() {
+		return departure;
+	}
+
+	public void setDeparture(String departure) {
+		this.departure = departure;
+	}
+
+	public String getFlightNumbers() {
+		return flightNumbers;
+	}
+
+	public void setFlightNumbers(String flightNumbers) {
+		this.flightNumbers = flightNumbers;
 	}
 
 	@Override
 	public String toString() {
-		return "Flight [adults=" + adults + ", cabinClass=" + cabinClass + ", children=" + children + ", infants="
-				+ infants + ", groupPricing=" + groupPricing + ", currency=" + currency + ", country=" + country
-				+ ", orginPlace=" + orginPlace + ", destinationPlace=" + destinationPlace + ", inboundDate="
-				+ inboundDate + ", outboundDate=" + outboundDate + ", locale=" + locale + "]";
+		return "Flight [sessionKey=" + sessionKey + ", imageUrl=" + imageUrl + ", id=" + id + ", code=" + code
+				+ ", name=" + name + ", displayCode=" + displayCode + ", carrierId=" + carrierId + ", flightNumber="
+				+ flightNumber + ", journeyMode=" + journeyMode + ", destinationStation=" + destinationStation
+				+ ", stops=" + stops + ", duration=" + duration + ", arrival=" + arrival + ", carriers=" + carriers
+				+ ", directionality=" + directionality + ", originStation=" + originStation + ", departure=" + departure
+				+ ", flightNumbers=" + flightNumbers + "]";
 	}
 	
 	
-	
 
+	
 	
 	
 	
 	
 }
-	
-	
-	
-	
