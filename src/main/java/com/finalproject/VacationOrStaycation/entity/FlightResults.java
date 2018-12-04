@@ -5,25 +5,57 @@ import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown= true)
+
 public class FlightResults {
-	private String imageUrl;
-	private Integer id;
-	private String Code;
-	private String name;
-	private String displayCode;
-	private String carrierId;
-	private Integer flightNumber;
-	private String journeyMode;
-	private String destinationStation;
-	private Integer stops;
-	private String duration;
-	private String arrival;
-	private String carriers;
-	private String directionality;
-	private String originStation;
-	private String departure;
-	private String flightNumbers;
 	
+	private int count;
+	private String next;
 	private ArrayList<Flight> results;
+	
+	public FlightResults() {
+		
+	}
+
+	public FlightResults(int count, String next, ArrayList<Flight> results, String sessionKey) {
+		super();
+		this.count = count;
+		this.next = next;
+		this.results = results;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getNext() {
+		return next;
+	}
+
+	public void setNext(String next) {
+		this.next = next;
+	}
+
+	public ArrayList<Flight> getResults() {
+		return results;
+	}
+
+	public void setResults(ArrayList<Flight> results) {
+		this.results = results;
+	}
+
+	@Override
+	public String toString() {
+		return "FlightResults [count=" + count + ", next=" + next + ", results="
+				+ results + "]";
+	}
+
+	
+
+	
+	
 	
 }

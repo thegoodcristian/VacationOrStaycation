@@ -27,6 +27,9 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 
 @Controller
 public class HomeController {
+	
+//	@Autowired
+//	FlightRepository fr;
 
 	@Value("${skyscanner.key}")
 	String skyKey;
@@ -39,8 +42,8 @@ public class HomeController {
 	
 	
 	//Forms 
-	@RequestMapping("/search")
-	public ModelAndView getFlights(@RequestParam("adults")Integer adults,
+	@RequestMapping("/search-session")
+	public ModelAndView flightSearchSession(@RequestParam("adults")Integer adults,
 			@RequestParam("cabinClass")String cabinClass,
 			@RequestParam("children")Integer children,
 			@RequestParam("infants")Integer infants,
@@ -53,6 +56,7 @@ public class HomeController {
 			@RequestParam("outboundDate")String outboundDate,
 			@RequestParam("locale")String locale) {
 		
+	
 		HttpResponse<JsonNode> session;
 		try {
 			session = Unirest.post("https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/pricing/v1.0")
@@ -72,77 +76,94 @@ public class HomeController {
 					.field("originPlace", originPlace)
 					.field("outboundDate", outboundDate)
 					.asJson();
-			//System.out.println(session.getStatus());
 			
 		Map <String, String> sessionReturn = new HashMap<>();
 		sessionReturn.put("location", session.getHeaders().getFirst("Location"));
-		//System.out.println(sessionReturn.get("location"));
 		
 		String sessionKey = sessionReturn.get("location").substring(64, 100);
-		//System.out.println(sessionKey);
+		
+		
 			
-//		HttpResponse<FlightResults> pollSession = Unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/pricing/uk2/v1.0/" + sessionKey + "?pageIndex=0&pageSize=10")
-//				.header("X-Mashape-Key", skyKey)
-//				.asObject(FlightResults.class);
-		
-		HttpResponse<JsonNode> pollSession = Unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/pricing/uk2/v1.0/" + sessionKey + "?pageIndex=0&pageSize=10")
-				.header("X-Mashape-Key", skyKey)
-				.asJson();
-		
-		Unirest.setObjectMapper(new ObjectMapper() {
-		    private com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper
-		                = new com.fasterxml.jackson.databind.ObjectMapper();
-
-		    public <T> T readValue(String value, Class<T> valueType) {
-		        try {
-		            return jacksonObjectMapper.readValue(value, valueType);
-		        } catch (IOException e) {
-		            throw new RuntimeException(e);
-		        }
-		    }
-
-		    public String writeValue(Object value) {
-		        try {
-		            return jacksonObjectMapper.writeValueAsString(value);
-		        } catch (JsonProcessingException e) {
-		            throw new RuntimeException(e);
-		        }
-		    }
-		});
-		
-//		FlightResults getFlights = pollSession.getBody();
-			
-			return new ModelAndView("travel-result", "getSession", pollSession.getBody());
+			return new ModelAndView("travel-result", "getKey", sessionKey);
 			
 		} catch (UnirestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			
-			System.out.println("Error, contact support!");
+			System.out.println("Error, contact support ninjas!");
 		}
 		
 		return new ModelAndView("travel-result", "getPage", "Error");
 	}
 	
 	@RequestMapping("/search-results")
-	public ModelAndView flightResult() {
+	public ModelAndView flightResults(@RequestParam("sessionKey") String sessionKey,
+			@RequestParam("destinationAirports") String destinationAirports,
+			@RequestParam("duration") String duration,
+			@RequestParam("excludeCarriers") String excludeCarriers,
+			@RequestParam("inboundArriveEndTime") String inboundArriveEndTime,
+			@RequestParam("inboundArriveStartTime") String inboundArriveStartTime,
+			@RequestParam("inboundDepartEndTime") String inboundDepartEndTime,
+			@RequestParam("inboundDepartStartTime") String inboundDepartStartTime,
+			@RequestParam("inboundDepartTime") String inboundDepartTime,
+			@RequestParam("includeCarriers") String includeCarriers,
+			@RequestParam("originAirports") String originAirports,
+			@RequestParam("outboundArriveEndTime") String outboundArriveEndTime,
+			@RequestParam("outboundArriveStartTime") String outboundArriveStartTime,
+			@RequestParam("outboundDepartEndTime") String outboundDepartEndTime,
+			@RequestParam("outboundDepartStartTime") String outboundDepartStartTime,
+			@RequestParam("outboundDepartTime") String outboundDepar,
+			@RequestParam("pageIndex") String pageIndex,
+			@RequestParam("pageSize") String pageSize, 
+			@RequestParam("sortOrder") String sortOrder,
+			@RequestParam("sortType") String sortType,
+			@RequestParam("stops") String stops)
+			
+			{
+		//Poll Session
+				Unirest.setObjectMapper(new ObjectMapper() {
+				    private com.fasterxml.jackson.databind.ObjectMapper jacksonObjectMapper
+				                = new com.fasterxml.jackson.databind.ObjectMapper();
+
+				    public <T> T readValue(String value, Class<T> valueType) {
+				        try {
+				            return jacksonObjectMapper.readValue(value, valueType);
+				        } catch (IOException e) {
+				            throw new RuntimeException(e);
+				        }
+				    }
+
+				    public String writeValue(Object value) {
+				    	
+				        try {
+				            return jacksonObjectMapper.writeValueAsString(value);
+				        } catch (JsonProcessingException e) {
+				            throw new RuntimeException(e);
+				        }
+				    }
+				});
+				
+				HttpResponse<Flight> pollSession = null;
+				try {
+					pollSession = Unirest.get("https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/pricing/uk2/v1.0/{sessionkey}?pageIndex=0&pageSize=10")
+							.header("X-Mashape-Key", skyKey)
+							.routeParam("sessionkey", sessionKey)
+							.asObject(Flight.class);
+					
+					Flight getFlight = pollSession.getBody();
+					
+					System.out.println(getFlight);
+					
+					return new ModelAndView("travel-result", "getFlights", getFlight);
+					
+				} catch (UnirestException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("Error - Could not poll session, contact support ninjas!");
+				}
+				
+				return new ModelAndView("travel-result", "travelGate", "Error - Could not map page, contact support ninjas!");
 		
-		RestTemplate rt = new RestTemplate();
-		
-		HttpHeaders headers = new HttpHeaders();
-		
-		headers.add("X-Mashape-Key", skyKey);
-		headers.add("Accept", MediaType.APPLICATION_PROBLEM_JSON_VALUE);
-		
-		HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-		
-		String url = "https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/pricing/uk2/v1.0/{sessionkey}?pageIndex=0&pageSize=10";
-		
-		ResponseEntity<Flight> response = rt.exchange(url, HttpMethod.GET, entity, Flight.class);
-		
-		System.out.println(response.getBody());
-		
-		return new ModelAndView("travel-result", "travel", "Live!");
 	}
 			
 	
