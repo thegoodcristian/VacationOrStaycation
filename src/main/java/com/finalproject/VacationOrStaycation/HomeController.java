@@ -40,6 +40,11 @@ public class HomeController {
 		return new ModelAndView("index", "indexGate", "Live!");
 	}
 	
+	@RequestMapping("/home")
+	public ModelAndView home() {
+		return new ModelAndView("index", "indexGate", "Live!");
+	}
+	
 	
 	//Forms 
 	@RequestMapping("/search-session")
@@ -55,7 +60,6 @@ public class HomeController {
 			@RequestParam("inboundDate")String inboundDate,
 			@RequestParam("outboundDate")String outboundDate,
 			@RequestParam("locale")String locale) {
-		
 	
 		HttpResponse<JsonNode> session;
 		try {

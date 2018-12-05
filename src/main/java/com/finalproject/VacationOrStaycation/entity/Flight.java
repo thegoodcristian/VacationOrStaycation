@@ -3,9 +3,11 @@ package com.finalproject.VacationOrStaycation.entity;
 import java.util.ArrayList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown= true)
 public class Flight {
+	@JsonProperty("SessionKey")
 	private String sessionKey;
 	private String imageUrl;
 	private Integer id;
@@ -24,6 +26,9 @@ public class Flight {
 	private String originStation;
 	private String departure;
 	private String flightNumbers;
+	
+	@JsonProperty("Itineraries")
+	private ArrayList<Itineraries> itineraries; 
 
 	public Flight() {
 		
@@ -32,7 +37,7 @@ public class Flight {
 	public Flight(String sessionKey, String imageUrl, Integer id, String code, String name, String displayCode, String carrierId,
 			Integer flightNumber, String journeyMode, String destinationStation, Integer stops, String duration,
 			String arrival, String carriers, String directionality, String originStation, String departure,
-			String flightNumbers) {
+			String flightNumbers, ArrayList<Itineraries> itineraries) {
 		super();
 		this.sessionKey = sessionKey;
 		this.imageUrl = imageUrl;
@@ -52,11 +57,12 @@ public class Flight {
 		this.originStation = originStation;
 		this.departure = departure;
 		this.flightNumbers = flightNumbers;
+		this.itineraries = itineraries;
 	}
 
 	public Flight(String sessionKey, String imageUrl, String code, String name, String displayCode, String carrierId, Integer flightNumber,
 			String journeyMode, String destinationStation, Integer stops, String duration, String arrival,
-			String carriers, String directionality, String originStation, String departure, String flightNumbers) {
+			String carriers, String directionality, String originStation, String departure, String flightNumbers, ArrayList<Itineraries> itineraries ) {
 		super();
 		this.sessionKey = sessionKey;
 		this.imageUrl = imageUrl;
@@ -75,6 +81,7 @@ public class Flight {
 		this.originStation = originStation;
 		this.departure = departure;
 		this.flightNumbers = flightNumbers;
+		this.itineraries = itineraries;
 	}
 
 	public String getSessionKey() {
@@ -221,6 +228,14 @@ public class Flight {
 		this.flightNumbers = flightNumbers;
 	}
 
+	public ArrayList<Itineraries> getItineraries() {
+		return itineraries;
+	}
+
+	public void setItineraries(ArrayList<Itineraries> itineraries) {
+		this.itineraries = itineraries;
+	}
+
 	@Override
 	public String toString() {
 		return "Flight [sessionKey=" + sessionKey + ", imageUrl=" + imageUrl + ", id=" + id + ", code=" + code
@@ -228,8 +243,12 @@ public class Flight {
 				+ flightNumber + ", journeyMode=" + journeyMode + ", destinationStation=" + destinationStation
 				+ ", stops=" + stops + ", duration=" + duration + ", arrival=" + arrival + ", carriers=" + carriers
 				+ ", directionality=" + directionality + ", originStation=" + originStation + ", departure=" + departure
-				+ ", flightNumbers=" + flightNumbers + "]";
+				+ ", flightNumbers=" + flightNumbers + ", itineraries=" + itineraries + "]";
 	}
+	
+	
+
+	
 	
 	
 

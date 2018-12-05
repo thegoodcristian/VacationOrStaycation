@@ -7,7 +7,7 @@
 <title>Search Flights - Vacation or Staycation?</title>
 </head>
 <body>
-	<h1>Search Flight Information<</h1>
+	<h1>Search Flight Information - Vacation Or Staycation<</h1>
 	<form action="search-results">
 	<input type="text" name="destinationAirports" placeholder="Destination Airport"><br>
 	<input type="text" name="duration" placeholder="Duration"><br>
