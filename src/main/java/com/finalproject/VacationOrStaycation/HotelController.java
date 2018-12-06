@@ -1,85 +1,57 @@
 package com.finalproject.VacationOrStaycation;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.finalproject.VacationOrStaycation.hotelEntity.ChildrenAges;
-import com.finalproject.VacationOrStaycation.hotelEntity.Occupancies;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.finalproject.VacationOrStaycation.yelpEntity.YelpSearch;
+
 
 @Controller
 public class HotelController {
 
-	@Value("${airhob.key}")
-	String hotelKey;
-	
-	
-	//Forms
-	@RequestMapping("/hotel-search")
-	public ModelAndView searchHotel(@RequestParam("city") String city,
-			@RequestParam("country") String country,
-			@RequestParam("latitude") String latitude,
-			@RequestParam("longitude") String longitude,
-			@RequestParam("fromDate") String fromDate,
-			@RequestParam("toDate") String toDate,
-			@RequestParam("clientNationality") String clientNationality,
-			@RequestParam("currency") String currency,
-			@RequestParam("isAddress") boolean isAddress,
-			@RequestParam("isDescription") boolean isDescription,
-			@RequestParam("isFacility") boolean isFacility,
-			@RequestParam("occupancies") List<Occupancies> occupancies,
-			@RequestParam("noOfAdults") String noOfAdults,
-			@RequestParam("childrenAges") List<ChildrenAges> childrenAges)
-			{
-			
-	
-	HttpResponse<JsonNode> session;
-	
-	
-	try {
-		session = Unirest.post("https://dev-sandbox-api.airhob.com/sandboxapi/stays/v1/search")
-			.header("apikey", hotelKey)
-			.header("mode", "sandbox")
-			.header("Content-Type", "application/json")
-			.field("city", city)
-			.field("country", country)
-			.field("latitude", latitude)
-			.field("longitude", longitude)
-			.field("fromDate", fromDate)
-			.field("toDate", toDate)
-			.field("clientNationality", clientNationality)
-			.field("currency", currency)
-			.field("isAddress", isAddress)
-			.field("isDescription", isDescription)
-			.field("isFacility", isFacility)
-			.field("occupancies", occupancies)
-			.field("noOfAdults", noOfAdults)
-			.field("childrenAges", childrenAges)
-			.asJson();
 
+	
+	@Value("${yelp.key}")
+	String yelpKey;
 
-		return new ModelAndView("hotel-result", "hotelResult", "Your search results");
+	
+	
+	@RequestMapping("/yelp-search")
+	public ModelAndView searchStaycation(@RequestParam("term2") String term2, @RequestParam("term1") String term1,
+			@RequestParam("location2") String location2, @RequestParam("location1") String location1,
+			@RequestParam("price2") String price2, @RequestParam("price1") String price1)
+	{
+		RestTemplate rt = new RestTemplate();
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", "Bearer " + yelpKey);
+		headers.add("Accept", MediaType.APPLICATION_JSON_VALUE);
 		
 		
-	} catch (UnirestException e) {
+		HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+		String url1 = "https://api.yelp.com/v3/businesses/search?term=" + term1 + "&location=" + location1 + "&price=" + price1;
+		String url2 = "https://api.yelp.com/v3/businesses/search?term=" + term2 + "&location=" + location2 + "&price=" + price2;
+		ResponseEntity<YelpSearch> response1 = rt.exchange(url1, HttpMethod.GET, entity, YelpSearch.class);
+		ResponseEntity<YelpSearch> response2 = rt.exchange(url2, HttpMethod.GET, entity, YelpSearch.class);		
+		YelpSearch yelpSearch1 = response1.getBody();
+		YelpSearch yelpSearch2 = response2.getBody();
+
+		ModelAndView mv = new ModelAndView("yelp-result", "yelpSearch1", yelpSearch1.getBusinesses());
+		mv.addObject("yelpSearch2", yelpSearch2.getBusinesses());
 		
-		e.printStackTrace();
-		
-		System.out.println("Error, contact support ninjas!");
-		
+		return mv;
+
 	}
 	
-	return new ModelAndView("travel-result", "getPage", "Error");
 	
-
-}
 }

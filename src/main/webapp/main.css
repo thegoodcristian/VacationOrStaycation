@@ -1,0 +1,30 @@
+@charset "UTF-8";
+Body{
+    margin: 50px;
+}
+div {
+    border: 4px solid #3bdd21;
+    
+}
+#vacation{
+    border: 4px solid #dd0200;  
+}
+#eachVacationHotel{
+    border: 4px solid #25dadd;
+}
+#staycation{
+    border: 4px solid #ddc600;  
+}
+#eachStaycationHotel{
+    border: 4px solid #dd20c6;
+}
+ .column {
+    float: left;
+    width: 50%;
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}

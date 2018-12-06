@@ -7,27 +7,26 @@
 	<title>Home - Vacation or Staycation!</title>
 </head>
 <body>
-	${indexGate }
+	${indexGate}
 	<h1>Get Flight information</h1>
-	<form action="search-session">
-		<input type="text" name="adults" placeholder="Number of Adult Passengers(1-8)"><br>
-		<input type="text" name="cabinClass" placeholder="Cabin Class"><br>
-		<input type="text" name="children" placeholder="Number of Child Passengers(0-8)"><br>
-		<input type="text" name="infants" placeholder="Number of Infant Passengers(0-8)"><br>
-		<input type="text" name="groupPricing" placeholder="Group Pricing"><br>
-		<input type="text" name="currency" placeholder="Currency"><br>
-		<input type="text" name="country" placeholder="Market Country"><br>
-		<input type="text" name="originPlace" placeholder="Origin Place"><br>
-		<input type="text" name="destinationPlace" placeholder="Destination Place"><br>
-		<input type="text" name="inboundDate" placeholder="Inbound Date"><br>
-		<input type="text" name="outboundDate" placeholder="Outbound Date"><br>
-		<input type="text" name="locale" placeholder="Locale"><br>
-		<!--<input type="text" name="apiKey" placeholder="API Key"><br>-->
-		<input type="submit" value="Search">
-	
-	</form>
-	
-	<a href="search">Test w/ no vals</a>
+	<a href="flight-search">Get Flight information</a>
+
+            <h1>Get Vacation information</h1>
+    <form action="yelp-search">
+        <input type="text" name="term1" placeholder="term1"><br>
+        <input type="text" name="location1" placeholder="location1"><br>
+        <input type="text" name="price1" placeholder="price1"><br>
+    
+    
+    
+                <h1>Get Staycation information</h1>
+        <input type="text" name="term2" placeholder="term2"><br>
+        <input type="text" name="location2" placeholder="location2"><br>
+        <input type="text" name="price2" placeholder="price2"><br>
+    
+        <input type="submit" value="Search">
+    </form>
+
 
 </body>
 </html>

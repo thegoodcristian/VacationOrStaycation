@@ -6,19 +6,28 @@
 <head>
 	<meta charset="ISO-8859-1">
 	<title>Search Flights - Vacation or Staycation?</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootswatch/4.1.3/simplex/bootstrap.min.css" rel="stylesheet" integrity="sha384-C/fi3Y7sgGQc3Lxu71QIVbBJ9iNQ/11o+YZNg2GRUrRrJayHEMpEc2I/jFSkMXAW" crossorigin="anonymous">
+	
 </head>
 <body>
 	<div class=container>
 		<h1>Available Flights - Vacation Or Staycation</h1>
 	</div>
 	<div class=container>
-		<table class="table">
+	${getFlights}
+	</div>
+	<div class=container>
+	<table class="table">
 		<c:forEach var="load" items="${getFlights}">
 			<tr>
-				<td>${load.pricingOptions}</td>
+				<td>${load.minPrice}</td>
+				<td>${load.direct}</td>
+				<td>${load.quoteId}</td>
+				<td><a class="btn btn-primary" href="/update?personid=">Update</a></td>
+				<td><a class="btn btn-primary" href="/delete?personid=">Delete</a></td>
 			</tr>
 		</c:forEach>
-		</table>
+	</table> 
 	</div>
 </body>
 </html>
