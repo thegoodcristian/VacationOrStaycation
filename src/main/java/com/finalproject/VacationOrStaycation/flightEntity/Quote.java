@@ -4,48 +4,48 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Quotes {
+public class Quote {
 	@JsonProperty("QuoteId")
-	private String quoteId;
+	private Integer quoteId;
 	@JsonProperty("MinPrice")
-	private String minPrice;
+	private Integer minPrice;
 	@JsonProperty("Direct")
-	private String direct;
+	private Boolean direct;
 	//private ArrayList<OutboundLeg> outboundLeg;
 	//private ArrayList<InboundLeg> inboundLeg;
 	
-	public Quotes() {
+	public Quote() {
 		
 	}
 	
-	public Quotes(String quoteId, String minPrice, String direct) {
+	public Quote(Integer quoteId, Integer minPrice, Boolean direct) {
 		super();
 		this.quoteId = quoteId;
 		this.minPrice = minPrice;
 		this.direct = direct;
 	}
 
-	public String getQuoteId() {
+	public Integer getQuoteId() {
 		return quoteId;
 	}
 
-	public void setQuoteId(String quoteId) {
+	public void setQuoteId(Integer quoteId) {
 		this.quoteId = quoteId;
 	}
 
-	public String getMinPrice() {
+	public Integer getMinPrice() {
 		return minPrice;
 	}
 
-	public void setMinPrice(String minPrice) {
+	public void setMinPrice(Integer minPrice) {
 		this.minPrice = minPrice;
 	}
 
-	public String getDirect() {
+	public Boolean getDirect() {
 		return direct;
 	}
 
-	public void setDirect(String direct) {
+	public void setDirect(Boolean direct) {
 		this.direct = direct;
 	}
 

@@ -13,9 +13,8 @@
 	<div class=container>
 		<h1>Available Flights - Vacation Or Staycation</h1>
 	</div>
-	<div class=container>
-	${getFlights}
-	</div>
+	
+	<%-- </div>
 	<div class=container>
 	<table class="table">
 		<c:forEach var="load" items="${getFlights}">
@@ -28,6 +27,15 @@
 			</tr>
 		</c:forEach>
 	</table> 
-	</div>
+	</div> --%>
+	
+	                <c:forEach var="f1" items="${getFlights}">
+                    <div id="eachVacationHotel">
+                    <tr>
+                        <td>${f1.name}<br></td>
+                    </tr>
+                    </div>
+                </c:forEach>
+	
 </body>
 </html>
