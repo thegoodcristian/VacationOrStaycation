@@ -7,12 +7,24 @@
 	<title>Home - Vacation or Staycation!</title>
 </head>
 <body>
-	${indexGate}
 	<h1>Get Flight information</h1>
-	<a href="flight-search">Get Flight information</a>
+<!-- 	<a href="flight-search">Get Flight information</a> -->
 
-            <h1>Get Vacation information</h1>
+
+
     <form action="yelp-search">
+    
+    	<h1>Search Flight Information - Vacation Or Staycation</h1>
+		<input type="text" class=form-control name="country" placeholder="Current Country (Format: US)"><br>
+		<input type="text" class=form-control name="currency" placeholder="Desired Currency (Format: USD)"><br>
+		<input type="text" class=form-control name="destinationplace" placeholder="Destination Airport (Format: JFK-sky)"><br>
+		<input type="text" class=form-control name="outboundpartialdate" placeholder="Outbound Date (Format: yyyy-mm-dd or yyyy-mm))"><br>
+		<input type="text" class=form-control name="inboundpartialdate" placeholder="Inbound Date (Format: yyyy-mm-dd or yyyy-mm)"><br>
+		<input type="text" class=form-control name="locale" placeholder="Locale (Format: en-US)"><br>
+		<input type="text" class=form-control name="originplace" placeholder="Origin Airport (Format: SFO-sky)"><br>
+	
+            <h1>Get Hotel information</h1>
+    
         <input type="text" name="term1" placeholder="term1"><br>
         <input type="text" name="location1" placeholder="location1"><br>
         <input type="text" name="price1" placeholder="price1"><br>

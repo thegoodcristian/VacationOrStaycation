@@ -79,28 +79,30 @@ public class FlightController {
 //		return new ModelAndView("travel-result", "getPage", "Error");
 //	}
 
-	@RequestMapping("search-flight")
-	public ModelAndView flightSearch(@RequestParam("country") String country, @RequestParam("currency") String currency,
-			@RequestParam("destinationplace") String destinationPlace,
-			@RequestParam("inboundpartialdate") String inboundPartialDate,
-			@RequestParam("outboundpartialdate") String outboundPartialDate, @RequestParam("locale") String locale,
-			@RequestParam("originplace") String originPlace) throws URISyntaxException {
-//		URI uri = new URI("https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/browsequotes/v1.0/"
+	
+	//most recent successful connection
+//	@RequestMapping("search-flight")
+//	public ModelAndView flightSearch(@RequestParam("country") String country, @RequestParam("currency") String currency,
+//			@RequestParam("destinationplace") String destinationPlace,
+//			@RequestParam("inboundpartialdate") String inboundPartialDate,
+//			@RequestParam("outboundpartialdate") String outboundPartialDate, @RequestParam("locale") String locale,
+//			@RequestParam("originplace") String originPlace) throws URISyntaxException {
+////		URI uri = new URI("https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/browsequotes/v1.0/"
+////				+ country + "/" + currency + "/" + locale + "/" + originPlace + "/" + destinationPlace + "/"
+////				+ outboundPartialDate + "/" + inboundPartialDate);
+//		String uri = "https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/browsequotes/v1.0/"
 //				+ country + "/" + currency + "/" + locale + "/" + originPlace + "/" + destinationPlace + "/"
-//				+ outboundPartialDate + "/" + inboundPartialDate);
-		String uri = "https://skyscanner-skyscanner-flight-search-v1.p.mashape.com/apiservices/browsequotes/v1.0/"
-				+ country + "/" + currency + "/" + locale + "/" + originPlace + "/" + destinationPlace + "/"
-				+ outboundPartialDate + "/" + inboundPartialDate;
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("X-Mashape-Key", skyKey);
-		headers.add("Accept", "application/json");
-//		RequestEntity<MultiValueMap<String, String>> request = new RequestEntity<MultiValueMap<String, String>>(null,
-//				headers, HttpMethod.GET, uri);
-		RestTemplate rT = new RestTemplate();
-		ResponseEntity<FlightResults> response = rT.exchange(uri,HttpMethod.GET, new  HttpEntity<String>(headers), FlightResults.class);
-		return new ModelAndView("flight-result", "getFlights", response.getBody().getCarriers());
-
-	}
+//				+ outboundPartialDate + "/" + inboundPartialDate;
+//		HttpHeaders headers = new HttpHeaders();
+//		headers.add("X-Mashape-Key", skyKey);
+//		headers.add("Accept", "application/json");
+////		RequestEntity<MultiValueMap<String, String>> request = new RequestEntity<MultiValueMap<String, String>>(null,
+////				headers, HttpMethod.GET, uri);
+//		RestTemplate rT = new RestTemplate();
+//		ResponseEntity<FlightResults> response = rT.exchange(uri,HttpMethod.GET, new  HttpEntity<String>(headers), FlightResults.class);
+//		return new ModelAndView("flight-result", "getFlights", response.getBody().getCarriers());
+//
+//	}
 	
 	//@RequestMapping("flighttest")
 //	public ModelAndView flightSearches() throws URISyntaxException {
